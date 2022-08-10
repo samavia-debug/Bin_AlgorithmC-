@@ -1,0 +1,106 @@
+﻿<Window x:Class="BinCompletionAlgorithm.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BinCompletionAlgorithm"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="2"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="12" Grid.Row="0" Grid.Column="0">
+            <Label FontWeight="Bold" Content="Select Bins CSV :"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Click="SelectBinFilesClick" Padding="4" Margin="4,0" HorizontalAlignment="Right" Content="Choose File" HorizontalContentAlignment="Right"/>
+                <Label HorizontalAlignment="Stretch" Content="No File Selected ..." x:Name="BinsCSVName"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Rectangle Grid.Column="1" Grid.RowSpan="4" Stroke="Black" Margin="0,12" Fill="Black"/>
+
+        <StackPanel Margin="12" Grid.Row="0" Grid.Column="2">
+            <Label FontWeight="Bold" Content="Select Numbers CSV :"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Click="SelectItemFilesClick" Padding="4" Margin="4,0" HorizontalAlignment="Right" Content="Choose File" HorizontalContentAlignment="Right"/>
+                <Label HorizontalAlignment="Stretch" Content="No File Selected ..." x:Name="NumbersCSVName"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Grid.Column="0" Margin="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Content="Bin Size :"/>
+            <Label Grid.Column="1" Content="Bin Label/Code:"/>
+            <TextBox VerticalContentAlignment="Center" Grid.Row="1" PreviewTextInput="CheckForNumericInput"  x:Name="BinSize" Margin="4,0" Tag="Bin Size" ToolTip="Add Bin Size" AutomationProperties.HelpText="Bin Size" />
+            <TextBox VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1"  x:Name="BinLabel" Tag="Bin Label" Margin="4,0" ToolTip="Add Bin Label" AutomationProperties.HelpText="Bin Label" />
+            <Button Click="BinAddButtonClicked" Padding="4" Grid.Row="1" Grid.Column="2" Content="Add Bin"/>
+        </Grid>        
+        
+        <Grid VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="2" Margin="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox PreviewTextInput="CheckForNumericInput" VerticalContentAlignment="Center" x:Name="ItemSize" Tag="Item Value" ToolTip="Add Item Value" AutomationProperties.HelpText="Item Value" />
+            <Button Margin="4,0" Click="ItemAddButtonClicked" Padding="4" Grid.Column="1" Content="Add Item"/>
+        </Grid>
+
+        <ListView Margin="12"  Grid.Row="2" Grid.Column="0" x:Name="BinList"></ListView>
+        <ListView Margin="12" Grid.Row="2" Grid.Column="2" x:Name="ItemList"></ListView>
+        <ListView Margin="12" Grid.Row="1" Grid.RowSpan="2" Grid.Column="4" x:Name="ResultList"></ListView>
+        
+        <Rectangle Grid.Column="3" Grid.RowSpan="4" Stroke="Black" Margin="0,12" Fill="Black"/>
+
+        <StackPanel Margin="12" Grid.Row="0" Grid.Column="4">
+            <Label FontWeight="Bold" Content="Select Bins CSV :"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Click="SaveToFileButton_Click" Padding="4" Margin="4,0" HorizontalAlignment="Right" x:Name="SaveToFileButton" IsEnabled="False" Content="Save To File" HorizontalContentAlignment="Right"/>
+                <Label HorizontalAlignment="Stretch" Content="No File Selected ..." x:Name="ExportedFileName"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Rectangle Grid.ColumnSpan="5" Grid.Row="3" Stroke="Black" Margin="12,0" Fill="Black"/>
+
+
+        <Grid  Grid.Row="4" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Click="RunProgramButton_Click" HorizontalAlignment="Stretch" Content="Run Program" Padding="4" Margin="12" BorderBrush="Transparent" x:Name="RunProgramButton" IsEnabled="False" Background="#FF07D213"/>
+            <Button Grid.Column="2" Content="Reset All Values" Padding="4" Margin="12" BorderBrush="Transparent" Click="ResetAllValues" Background="Orange"/>
+        </Grid>
+
+        <StackPanel Grid.Row="4" Grid.Column="2" Margin="12" Orientation="Horizontal">
+            <Label Content="Program Run Time :"/>
+            <Label x:Name="RunTimeValue" Content=""/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Grid.Column="4" Margin="12" Orientation="Horizontal">
+            <Label Content="Minimum Number Of Bins:"/>
+            <Label x:Name="MinBinsValue" Content=""/>
+        </StackPanel>
+
+    </Grid>
+</Window>
